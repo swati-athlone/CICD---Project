@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: flight-booking-service
+  config:
+    import: optional:configserver:http://localhost:8888  # Fetch configurations from the Config Server
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/microservices
+    password: Athlone@032025!
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+jwt:
+  secret: N3YzQm9hV2tYc2J3UG5vRFBqSXpWZFZRRU5JeGdZaVg=
+  expiration: 1800000 # 30 minutes in milliseconds
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
